@@ -16,14 +16,27 @@ var questions = [
     { q: ".", a: "" },
     { q: "", a: "" }
   ];
+
+  var showGame = null;
+  var rightAnswer;
 //start game
 function start() {
-
+//click function
+$('#start').click(function() {  
+    if (!showGame) {
+        showGame = setInterval(showGame, 1000)
+        console.log('yeet')
+      }
+  })
+  
 }
+
+
 //timer
 function timer(){
 
 }
+
 //result screen
 function result() {
 
