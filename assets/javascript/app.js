@@ -23,6 +23,7 @@ var questions = [
 function start() {
 //click function
 $('#start').click(function() {  
+  window.location.href='quiz.html';
     if (!showGame) {
         showGame = setInterval(showGame, 1000)
         console.log('yeet')
@@ -30,7 +31,6 @@ $('#start').click(function() {
   })
   
 }
-
 
 //timer
 function timer(){
