@@ -1,9 +1,13 @@
-/*
+
 body{ 
 background-image: url(../images/tdwp.jpg);
-color: white;
+
 }
-*/
+
 #questions{
     color:green;
+}
+
+.container {
+    background-color: white;
 }

@@ -10,38 +10,42 @@
 //result screen shows the time that was remaining when the answer was clicked, whether or not they got the question right or not, the correct asnwer, and a gif
 //questions don't need to randomize 
 var questions = [
-    { q: "", a: "" },
+    { question: "", answer: "" },
     { q: ".", a: "" },
     { q: ".", a: "" },
     { q: ".", a: "" },
     { q: "", a: "" }
   ];
-
-  var showGame = null;
+  var correct = true;
   var rightAnswer;
+
+//functions will run when the page is loaded
+$(document).ready(function(){
+
 //start game
 function start() {
 //click function
-$('#start').click(function() {  
-  window.location.href='quiz.html';
-    if (!showGame) {
-        showGame = setInterval(showGame, 1000)
-        console.log('yeet')
-      }
-  })
+$('#submit').click(function() {  
   
+})
 }
-
 //timer
 function timer(){
 
 }
 
-//result screen
+//when answer is clicked..cpu compares it to the right answer and adds to the result
 function result() {
-
+  $('input').click(function() {  
+  
+  })
 }
+
+
 //the time it takes the answer slide to move on
 function slideInterval() {
 
 }
+
+
+}) // end if ready function
