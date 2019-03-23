@@ -11,6 +11,10 @@ $(document).ready(function () {
 		game.start();
 	}) //end of start click function
 
+	$("#submit").click(function(){
+		game.done();
+	}) //end of submit button function
+
 	var quizItems = [{
 		question: "How many questions are in this quiz?",
 		answers: ["1 ", "12 ", "4 ", "7 "],
@@ -39,25 +43,68 @@ $(document).ready(function () {
 		//function to set the countdown interval
 		tickTickBoom: function () {
 			game.timeLeft--;
-			if (game.done == 0) {
-				console.log('no time left bud')
+			//referencing the counter id we made in start function (setInterval)
+			$("#counter").html(game.timeLeft);
+			//when the timer runs out run game.done function
+			if (game.timeLeft == 0) {
 				game.done();
 			}
-		}, //end of tickTickBoom fucntion
+		}, //end of tickTickBoom function
 
 	//function that will start the game and add elements to the page with a timer counting down
 	start: function () {
-			timer = setInterval(game.tickTickBoom, 1000)
-			$("#start").remove();
+
+		//****not counting down***//
+		 timer = setInterval(game.tickTickBoom, 1000);
+		//add timer to the page
+	$("#timer-here").append($('<h2 id="bologna"> Time Reamining: <span id="counter"> 20 </span> Seconds</h2>'));
+		//removing start button after it is pressed
+		//this way there are no parameters needed for the interval function to work properly on press
+		$("#start").remove();
+				//loops through the obect and retrieves the questions and displays them on the page 1 after the other
 			for (i = 0; i < quizItems.length; i++) {
 				$("#sub-container").append("<h3 id='question-text'>" + quizItems[i].question + "<h3>");
-				//putting the answers next to the radio input
+				//used nested loop to create the answers after the questions
+				//creating the radio input and putting the answers next to the them
 				for (j = 0; j < quizItems[i].answers.length; j++) {
 					$('#sub-container').append("<input type='radio' name='question-" + i + "' value= " + quizItems[i].answers[j] + "' >" + quizItems[i].answers[j]);
 				}
-			}
+			} 
+			//created submit button after the start button is clicked
 			$("#submit").append('<button type="button" class="btn btn-success" id="submit-btn">Submit</button>');
-		} //end of start function
+		}, //end of start function
+
+		//game done function..allows us to display results screen 
+		done: function(){
+			//remove the qestions & answersfrom the page
+			$("#sub-container").remove();
+			$("#submit").remove();
+			//stops timer
+			clearInterval(timer);
+			//displaying text based on whether or not there was time left 
+			if (game.timeLeft==0){
+				$("#bologna").html("Ah Man! You ran out of time! Better Luck Next Time!")
+			} else {
+				$("#bologna").html("Great Job! You finished with " + game.timeLeft + " seconds left!")
+			}
+
+			//need to compare inputs to the correct answer and generate a score 
+			//correct
+			//incorrect
+			//unanswered
+			
+		}, //end of done function
+
+		results: function() {
+			for (n = 0; n < quizItems[i].answer[j]; n++) {
+				if (input===quizItems[i].correctAnswer) {
+					correct++;
+				} else if (input !== quizItems[i].correctAnswer) {
+					incorrect++;
+				}
+			}//end of for loop
+		} //end of results function
+
 	} //end of game object
 
 
