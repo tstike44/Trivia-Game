@@ -1,8 +1,4 @@
 
-//reset function (start over) *not working*
-//start function *not working*
-//timer function *not working*
-//questions don't need to randomize 
 //functions will run when the page is loaded
 $(document).ready(function () {
 
@@ -38,7 +34,6 @@ $(document).ready(function () {
 	var game = {
 		correct: 0,
 		incorrect: 0,
-		unsanswered: 0,
 		timeLeft: 20,
 
 		//function to set the countdown interval
@@ -69,60 +64,21 @@ $(document).ready(function () {
 					$('#sub-container').append("<input type='radio' name='question-" + i + "' value= " + quizItems[i].answers[j] + "' >" + quizItems[i].answers[j]);
 				}
 			}
+
 			//created submit button after the start button is clicked
 			$("#submit").append('<button type="button" class="btn btn-success" id="submit-btn">Submit</button>');
 		}, //end of start function
 
 		//game done function..allows us to display results screen 
 		done: function () {
+
 			//stops timer
 			clearInterval(timer);
+
 			//remove the qestions & answersfrom the page
 			$("#sub-container").remove();
 			$("#submit").remove();
-			//checking to see if the correct answer was selected
 
-			//***********couldn't find a shorter way to do this********** *///
-			$.each($('#input[name="question-1"]:checked' ), function() {
-				if ($(this).val() == questions[0].correctAnswer) 
-				{
-					game.correct++;
-				} else if ($(this).val() !== questions[0].correctAnswer) {
-					game.incorrect++;
-				} else {
-					game.unsanswered++;
-				} 
-			});
-			$.each($('#input[name="question-1"]:checked' ), function() {
-				if ($(this).val() == questions[1].correctAnswer) 
-				{
-					game.correct++;
-				} else if ($(this).val() !== questions[1].correctAnswer) {
-					game.incorrect++;
-				} else {
-					game.unsanswered++;
-				} 
-			});
-			$.each($('#input[name="question-1"]:checked' ), function() {
-				if ($(this).val() == questions[2].correctAnswer) 
-				{
-					game.correct++;
-				} else if ($(this).val() !== questions[2].correctAnswer) {
-					game.incorrect++;
-				} else {
-					game.unsanswered++;
-				} 
-			});
-			$.each($('#input[name="question-1"]:checked' ), function() {
-				if ($(this).val() == questions[3].correctAnswer) 
-				{
-					game.correct++;
-				} else if ($(this).val() !== questions[3].correctAnswer) {
-					game.incorrect++;
-				} else {
-					game.unsanswered++;
-				} 
-			});
 			//displaying text based on whether or not there was time left 
 			if (game.timeLeft == 0) {
 				$("#result-time").html("Ah Man! You ran out of time!")
@@ -130,17 +86,50 @@ $(document).ready(function () {
 				$("#result-time").html("You finished with " + game.timeLeft + " seconds left!")
 			}
 
-			//need to compare inputs to the correct answer and generate a score 
-			//correct
-			//incorrect
-			//unanswered
+			//checking to see if the correct answer was selected
+
+			//***********couldn't find a shorter way to do this********** *//
+					
+						//***********NOT WORKING********** *//
+			$.each($('#input[name="question-0"]:checked' ), function() {
+				if ($(this).val() == questions[0].correctAnswer) 
+				{
+					game.correct++;
+				} else {
+					game.incorrect++;
+				} 
+			});
+			$.each($('#input[name="question-1"]:checked' ), function() {
+				if ($(this).val() == questions[1].correctAnswer) 
+				{
+					game.correct++;
+				} else {
+					game.incorrect++;
+				} 
+			});
+			$.each($('#input[name="question-2"]:checked' ), function() {
+				if ($(this).val() === questions[2].correctAnswer) 
+				{
+					game.correct++;
+				} else {
+					game.incorrect++;
+				} 
+			});
+			$.each($('#input[name="question-3"]:checked' ), function() {
+				if ($(this).val() == questions[3].correctAnswer) 
+				{
+					game.correct++;
+				} else  {
+					game.incorrect++;
+				}
+			});
+			
 			game.results();
 		}, //end of done function
 
 		results: function () {
 			$("#results-text").append("<h3 id=correct>You got: " + this.correct + " correct! :D</h3> <br>");
-			$("#results-text").append("<h3 id=correct>You got: " + this.incorrect + " correct! :(</h3> <br>");
-			$("#results-text").append("<h3 id=correct>Left Unanswered: " + this.unsanswered + " (O_O) </h3> <br>");
+			$("#results-text").append("<h3 id=correct>You got: " + this.incorrect + " incorrect! :(</h3> <br>");
 
 		} //end of results function
 
