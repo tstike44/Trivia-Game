@@ -1,101 +1,67 @@
-//need questions
-//need answers
-//reset function (start over)
-//start function
-//timer function
-//change screens interval function
-//need a time element (maybe function)
-//start screen with start button (click to start the game)
-//next screen displays the time remaining, question, possible answers
-//result screen shows the time that was remaining when the answer was clicked, whether or not they got the question right or not, the correct asnwer, and a gif
+
+//reset function (start over) *not working*
+//start function *not working*
+//timer function *not working*
 //questions don't need to randomize 
-
-/*
-var game = {
-  quizItems: [{
-      question: "Question 1?",
-      options: ["1", "2", "3", "4"],
-      answer: "1"
-  }, {
-      question: "Question 2?",
-      options: ["1", "2", "3", "4"],
-      answer: "2"
-  }, {
-      question: "Question 3?",
-      options: ["1", "2", "3", "4"],
-      answer: "3"
-  }, {
-      question: "Question 4?",
-      options: ["1", "2", "3", "4"],
-      answer: "4"
-  }]
-}
-   might come back to this later       */
-  var correct = true;
-  var rightAnswer;
-  var start = false;
 //functions will run when the page is loaded
-$(document).ready(function(){
+$(document).ready(function () {
 
-//start game
-$('#start').click(function(){
-  start = true;
-  timeLeft();
-  console.log('yeehaw')
-  
-});
-//compare the answers chosen to the correct answer
-$('#group1').click(function(){
-  var userGuess ;
-  //what is the answer
-  //if user guessed input 1 then it should be compared to answer
-  if (userGuess === $('input'))
-  {   //user click should be compared to the right answer
-      
-  }
-  
-  
-});
+	$("#start").click(function () {
+		//referencing our start function
+		game.start();
+	}) //end of start click function
 
-//timer
-function timeLeft(){
+	var quizItems = [{
+		question: "How many questions are in this quiz?",
+		answers: ["1 ", "12 ", "4 ", "7 "],
+		correctAnswer: "4"
+	}, {
+		question: "Did you actually just count all the questions?",
+		answers: ["yes ", "no ", "idk ", "maybe "],
+		correctAnswer: "idk"
+	}, {
+		question: "How many cats does Trevor have?",
+		answers: ["how would I know? ", "22 ", "4 ", "0 "],
+		correctAnswer: "how would I know?"
+	}, {
+		question: "How much wood could a wood chuck, chuck if a wood chuck could chuck wood.",
+		answers: ["22 lbs ", "2 lbs ", "8 lbs ", "enough to party "],
+		correctAnswer: "enough to party"
+	}]; //end of quizItems 
 
-    if (start === true) {
-      setTimeout = (function() {
-        clockTicking()
-      }, 60000); //end of timeout function
-    }
-console.log(setTimeout)
-    
-  }
-  timeLeft();
+	//make a game object with functions nested inside
 
+	var game = {
+		correct: 0,
+		incorrect: 0,
+		timeLeft: 20,
 
-function clockTicking() {
-  $('#time-left').append("You have " + setTimeout + "seconds left");
-  console.log('you have 60 seconds left');
-}
+		//function to set the countdown interval
+		tickTickBoom: function () {
+			game.timeLeft--;
+			if (game.done == 0) {
+				console.log('no time left bud')
+				game.done();
+			}
+		}, //end of tickTickBoom fucntion
 
-//click function
-$('#submit').click(function() {  
-  
-}) //end of click function
-
-
-
-//when answer is clicked..cpu compares it to the right answer and adds to the result
-function result() {
-  $('input').click(function() {  
-  
-  })
-}
-
-
-//the time it takes the answer slide to move on
-function slideInterval() {
-
-}
+	//function that will start the game and add elements to the page with a timer counting down
+	start: function () {
+			timer = setInterval(game.tickTickBoom, 1000)
+			$("#start").remove();
+			for (i = 0; i < quizItems.length; i++) {
+				$("#sub-container").append("<h3 id='question-text'>" + quizItems[i].question + "<h3>");
+				//putting the answers next to the radio input
+				for (j = 0; j < quizItems[i].answers.length; j++) {
+					$('#sub-container').append("<input type='radio' name='question-" + i + "' value= " + quizItems[i].answers[j] + "' >" + quizItems[i].answers[j]);
+				}
+			}
+			$("#submit").append('<button type="button" class="btn btn-success" id="submit-btn">Submit</button>');
+		} //end of start function
+	} //end of game object
 
 
-}) // end of ready function
+
+
+}); // end of ready function
 
