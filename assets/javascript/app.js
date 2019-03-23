@@ -11,7 +11,7 @@ $(document).ready(function () {
 		game.start();
 	}) //end of start click function
 
-	$("#submit").click(function(){
+	$("#submit").click(function () {
 		game.done();
 	}) //end of submit button function
 
@@ -38,6 +38,7 @@ $(document).ready(function () {
 	var game = {
 		correct: 0,
 		incorrect: 0,
+		unsanswered: 0,
 		timeLeft: 20,
 
 		//function to set the countdown interval
@@ -51,17 +52,15 @@ $(document).ready(function () {
 			}
 		}, //end of tickTickBoom function
 
-	//function that will start the game and add elements to the page with a timer counting down
-	start: function () {
-
-		//****not counting down***//
-		 timer = setInterval(game.tickTickBoom, 1000);
-		//add timer to the page
-	$("#timer-here").append($('<h2 id="bologna"> Time Reamining: <span id="counter"> 20 </span> Seconds</h2>'));
-		//removing start button after it is pressed
-		//this way there are no parameters needed for the interval function to work properly on press
-		$("#start").remove();
-				//loops through the obect and retrieves the questions and displays them on the page 1 after the other
+		//function that will start the game and add elements to the page with a timer counting down
+		start: function () {
+			timer = setInterval(game.tickTickBoom, 1000);
+			//add timer to the page
+			$("#timer-here").append($('<h2 id="result-time"> Time Reamining: <span id="counter"> 20 </span> Seconds</h2>'));
+			//removing start button after it is pressed
+			//this way there are no parameters needed for the interval function to work properly on press
+			$("#start").remove();
+			//loops through the obect and retrieves the questions and displays them on the page 1 after the other
 			for (i = 0; i < quizItems.length; i++) {
 				$("#sub-container").append("<h3 id='question-text'>" + quizItems[i].question + "<h3>");
 				//used nested loop to create the answers after the questions
@@ -69,46 +68,83 @@ $(document).ready(function () {
 				for (j = 0; j < quizItems[i].answers.length; j++) {
 					$('#sub-container').append("<input type='radio' name='question-" + i + "' value= " + quizItems[i].answers[j] + "' >" + quizItems[i].answers[j]);
 				}
-			} 
+			}
 			//created submit button after the start button is clicked
 			$("#submit").append('<button type="button" class="btn btn-success" id="submit-btn">Submit</button>');
 		}, //end of start function
 
 		//game done function..allows us to display results screen 
-		done: function(){
+		done: function () {
+			//stops timer
+			clearInterval(timer);
 			//remove the qestions & answersfrom the page
 			$("#sub-container").remove();
 			$("#submit").remove();
-			//stops timer
-			clearInterval(timer);
+			//checking to see if the correct answer was selected
+
+			//***********couldn't find a shorter way to do this********** *///
+			$.each($('#input[name="question-1"]:checked' ), function() {
+				if ($(this).val() == questions[0].correctAnswer) 
+				{
+					game.correct++;
+				} else if ($(this).val() !== questions[0].correctAnswer) {
+					game.incorrect++;
+				} else {
+					game.unsanswered++;
+				} 
+			});
+			$.each($('#input[name="question-1"]:checked' ), function() {
+				if ($(this).val() == questions[1].correctAnswer) 
+				{
+					game.correct++;
+				} else if ($(this).val() !== questions[1].correctAnswer) {
+					game.incorrect++;
+				} else {
+					game.unsanswered++;
+				} 
+			});
+			$.each($('#input[name="question-1"]:checked' ), function() {
+				if ($(this).val() == questions[2].correctAnswer) 
+				{
+					game.correct++;
+				} else if ($(this).val() !== questions[2].correctAnswer) {
+					game.incorrect++;
+				} else {
+					game.unsanswered++;
+				} 
+			});
+			$.each($('#input[name="question-1"]:checked' ), function() {
+				if ($(this).val() == questions[3].correctAnswer) 
+				{
+					game.correct++;
+				} else if ($(this).val() !== questions[3].correctAnswer) {
+					game.incorrect++;
+				} else {
+					game.unsanswered++;
+				} 
+			});
 			//displaying text based on whether or not there was time left 
-			if (game.timeLeft==0){
-				$("#bologna").html("Ah Man! You ran out of time! Better Luck Next Time!")
+			if (game.timeLeft == 0) {
+				$("#result-time").html("Ah Man! You ran out of time!")
 			} else {
-				$("#bologna").html("Great Job! You finished with " + game.timeLeft + " seconds left!")
+				$("#result-time").html("You finished with " + game.timeLeft + " seconds left!")
 			}
 
 			//need to compare inputs to the correct answer and generate a score 
 			//correct
 			//incorrect
 			//unanswered
-			
+			game.results();
 		}, //end of done function
 
-		results: function() {
-			for (n = 0; n < quizItems[i].answer[j]; n++) {
-				if (input===quizItems[i].correctAnswer) {
-					correct++;
-				} else if (input !== quizItems[i].correctAnswer) {
-					incorrect++;
-				}
-			}//end of for loop
+		results: function () {
+			$("#results-text").append("<h3 id=correct>You got: " + this.correct + " correct! :D</h3> <br>");
+			$("#results-text").append("<h3 id=correct>You got: " + this.incorrect + " correct! :(</h3> <br>");
+			$("#results-text").append("<h3 id=correct>Left Unanswered: " + this.unsanswered + " (O_O) </h3> <br>");
+
 		} //end of results function
 
 	} //end of game object
-
-
-
 
 }); // end of ready function
 
