@@ -38,7 +38,7 @@ $(document).ready(function () {
 		correct: 0,
 		incorrect: 0,
 		timeLeft: 20,
-		/*
+		
 		//function to set the countdown interval
 		tickTickBoom: function () {
 			game.timeLeft--;
@@ -49,7 +49,7 @@ $(document).ready(function () {
 				game.done();
 			}
 		}, //end of tickTickBoom function
-		*/
+		
 		//function that will start the game and add elements to the page with a timer counting down
 		start: function () {
 			timer = setInterval(game.tickTickBoom, 1000);
