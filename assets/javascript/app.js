@@ -9,26 +9,26 @@ $(document).ready(function () {
 		$("#homer-two").remove();
 	}) //end of start click function
 
-	$("#submit").click(function () {
+	$("#submit-button").click(function () {
 		game.done();
 	}) //end of submit button function
 
 	var quizItems = [{
 
 		question: "How many questions are in this quiz?",
-		answers: ["1 ", "12 ", "4 ", "7 "],
+		answers: ["1", "12", "4", "7"],
 		correctAnswer: "4"
 	}, {
 		question: "Did you actually just count all the questions?",
-		answers: ["yes ", "no ", "idk ", "maybe "],
-		correctAnswer: "idk"
+		answers: ["yes", "no", "idk", "maybe"],
+		correctAnswer: "idk "
 	}, {
 		question: "How many cats does Trevor have?",
-		answers: ["how would I know? ", "22 ", "4 ", "0 "],
+		answers: ["how would I know?", "22", "4", "0"],
 		correctAnswer: "how would I know?"
 	}, {
 		question: "How much wood could a wood chuck, chuck if a wood chuck could chuck wood.",
-		answers: ["22 lbs ", "2 lbs ", "8 lbs ", "enough to party "],
+		answers: ["22 lbs", "2 lbs", "8 lbs", "enough to party"],
 		correctAnswer: "enough to party"
 	}]; //end of quizItems 
 
@@ -69,7 +69,7 @@ $(document).ready(function () {
 			}
 
 			//created submit button after the start button is clicked
-			$("#sub-container-fluid").append('<button type="button" class="btn btn-info" id="submit">Submit</button>');
+			$("#submit-button").append('<button type="button" class="btn btn-info" id="submit">Submit</button>');
 		}, //end of start function
 
 		//game done function..allows us to display results screen 
@@ -94,28 +94,28 @@ $(document).ready(function () {
 
 			//***********NOT WORKING********** *//
 			$.each($('#input[name="question-0"]:checked'), function () {
-				if ($(this).val() == questions[0].correctAnswer) {
+				if ($(this).val() == question[0].correctAnswer) {
 					game.correct++;
 				} else {
 					game.incorrect++;
 				}
 			});
 			$.each($('#input[name="question-1"]:checked'), function () {
-				if ($(this).val() == questions[1].correctAnswer) {
+				if ($(this).val() == question[1].correctAnswer) {
 					game.correct++;
 				} else {
 					game.incorrect++;
 				}
 			});
 			$.each($('#input[name="question-2"]:checked'), function () {
-				if ($(this).val() === questions[2].correctAnswer) {
+				if ($(this).val() === question[2].correctAnswer) {
 					game.correct++;
 				} else {
 					game.incorrect++;
 				}
 			});
 			$.each($('#input[name="question-3"]:checked'), function () {
-				if ($(this).val() == questions[3].correctAnswer) {
+				if ($(this).val() == question[3].correctAnswer) {
 					game.correct++;
 				} else {
 					game.incorrect++;
@@ -127,9 +127,8 @@ $(document).ready(function () {
 
 
 		results: function () {
-			$("#results-text").append("<h3 id=correct>You got: " + this.correct + " correct! :D</h3> <br>");
-			$("#results-text").append("<h3 id=incorrect>You got: " + this.incorrect + " incorrect! :(</h3> <br>");
-
+			$("#results-text").append("<h3 id=correct>You got: " + game.correct + " correct! :D</h3> <br>");
+			$("#results-text").append("<h3 id=incorrect>You got: " + game.incorrect + " incorrect! :(</h3> <br>");
 		} //end of results function
 
 	} //end of game object
