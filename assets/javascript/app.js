@@ -3,7 +3,7 @@
 $(document).ready(function () {
 
 	$("#start").click(function () {
-		//referencing our start function
+		//referencing start function
 		game.start();
 	}) //end of start click function
 
@@ -12,6 +12,7 @@ $(document).ready(function () {
 	}) //end of submit button function
 
 	var quizItems = [{
+		
 		question: "How many questions are in this quiz?",
 		answers: ["1 ", "12 ", "4 ", "7 "],
 		correctAnswer: "4"
@@ -35,7 +36,7 @@ $(document).ready(function () {
 		correct: 0,
 		incorrect: 0,
 		timeLeft: 20,
-
+		/*
 		//function to set the countdown interval
 		tickTickBoom: function () {
 			game.timeLeft--;
@@ -46,7 +47,7 @@ $(document).ready(function () {
 				game.done();
 			}
 		}, //end of tickTickBoom function
-
+		*/
 		//function that will start the game and add elements to the page with a timer counting down
 		start: function () {
 			timer = setInterval(game.tickTickBoom, 1000);
@@ -89,41 +90,37 @@ $(document).ready(function () {
 			//checking to see if the correct answer was selected
 
 			//***********couldn't find a shorter way to do this********** *//
-					
-						//***********NOT WORKING********** *//
-			$.each($('#input[name="question-0"]:checked' ), function() {
-				if ($(this).val() == questions[0].correctAnswer) 
-				{
+
+			//***********NOT WORKING********** *//
+			$.each($('#input[name="question-0"]:checked'), function () {
+				if ($(this).val() == questions[0].correctAnswer) {
 					game.correct++;
 				} else {
-					game.incorrect++;
-				} 
-			});
-			$.each($('#input[name="question-1"]:checked' ), function() {
-				if ($(this).val() == questions[1].correctAnswer) 
-				{
-					game.correct++;
-				} else {
-					game.incorrect++;
-				} 
-			});
-			$.each($('#input[name="question-2"]:checked' ), function() {
-				if ($(this).val() === questions[2].correctAnswer) 
-				{
-					game.correct++;
-				} else {
-					game.incorrect++;
-				} 
-			});
-			$.each($('#input[name="question-3"]:checked' ), function() {
-				if ($(this).val() == questions[3].correctAnswer) 
-				{
-					game.correct++;
-				} else  {
 					game.incorrect++;
 				}
 			});
-			
+			$.each($('#input[name="question-1"]:checked'), function () {
+				if ($(this).val() == questions[1].correctAnswer) {
+					game.correct++;
+				} else {
+					game.incorrect++;
+				}
+			});
+			$.each($('#input[name="question-2"]:checked'), function () {
+				if ($(this).val() === questions[2].correctAnswer) {
+					game.correct++;
+				} else {
+					game.incorrect++;
+				}
+			});
+			$.each($('#input[name="question-3"]:checked'), function () {
+				if ($(this).val() == questions[3].correctAnswer) {
+					game.correct++;
+				} else {
+					game.incorrect++;
+				}
+			});
+
 			game.results();
 		}, //end of done function
 
