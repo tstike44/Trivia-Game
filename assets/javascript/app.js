@@ -5,6 +5,8 @@ $(document).ready(function () {
 	$("#start").click(function () {
 		//referencing start function
 		game.start();
+		$("#homer-one").remove();
+		$("#homer-two").remove();
 	}) //end of start click function
 
 	$("#submit").click(function () {
@@ -12,7 +14,7 @@ $(document).ready(function () {
 	}) //end of submit button function
 
 	var quizItems = [{
-		
+
 		question: "How many questions are in this quiz?",
 		answers: ["1 ", "12 ", "4 ", "7 "],
 		correctAnswer: "4"
@@ -58,16 +60,16 @@ $(document).ready(function () {
 			$("#start").remove();
 			//loops through the obect and retrieves the questions and displays them on the page 1 after the other
 			for (i = 0; i < quizItems.length; i++) {
-				$("#sub-container").append("<h3 id='question-text'>" + quizItems[i].question + "<h3>");
+				$("#quiz-items").append("<h3 id='question-text'>" + quizItems[i].question + "<h3>");
 				//used nested loop to create the answers after the questions
 				//creating the radio input and putting the answers next to the them
 				for (j = 0; j < quizItems[i].answers.length; j++) {
-					$('#sub-container').append("<input type='radio' name='question-" + i + "' value= " + quizItems[i].answers[j] + "' >" + quizItems[i].answers[j]);
+					$('#quiz-items').append("<input type='radio' name='question-" + i + "' value= " + quizItems[i].answers[j] + "' >" + quizItems[i].answers[j]);
 				}
 			}
 
 			//created submit button after the start button is clicked
-			$("#submit").append('<button type="button" class="btn btn-success" id="submit-btn">Submit</button>');
+			$("#sub-container-fluid").append('<button type="button" class="btn btn-info" id="submit">Submit</button>');
 		}, //end of start function
 
 		//game done function..allows us to display results screen 
@@ -76,10 +78,9 @@ $(document).ready(function () {
 			//stops timer
 			clearInterval(timer);
 
-			//remove the qestions & answersfrom the page
-			$("#sub-container").remove();
+			//remove the qestions & answers from the page
+			$("#sub-container-fluid").remove();
 			$("#submit").remove();
-
 			//displaying text based on whether or not there was time left 
 			if (game.timeLeft == 0) {
 				$("#result-time").html("Ah Man! You ran out of time!")
@@ -123,6 +124,7 @@ $(document).ready(function () {
 
 			game.results();
 		}, //end of done function
+
 
 		results: function () {
 			$("#results-text").append("<h3 id=correct>You got: " + this.correct + " correct! :D</h3> <br>");

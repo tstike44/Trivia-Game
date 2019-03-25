@@ -14,21 +14,32 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <h1 id="header">Trivia</h1>
+            <h1 id="header"><img id="img-header" src="./assets/images/trivia-header.png"></img></h1>
         </div>
+
         <div class="row">
             <div id="timer-here"></div>
         </div>
-        <div id="sub-container">
+
+        <div id="sub-container-fluid">
+            <img id="homer-one" src="./assets/images/homer-trivia.png" alt="homer-trivia">
             <!-- start button -->
-            <button id="start" type="button" class="btn btn-success">start</button>
+            <button id="start" type="button" class="btn btn-info">start</button>
+
+            <img id="homer-two" src="./assets/images/homer-trivia.png" alt="homer-trivia">
+
+            <div class="row">
+                <div id="quiz-items"></div>
+            </div>
+
         </div>
-        <div id="results-text"></div>
-        <div id="submit"></div>
-    </div>
-    <!-- end of container -->
+        <div id="the-end">
+            <div id="results-text"></div>
+        </div>
+    </div> <!-- end of container -->
+
 
 
     <!-- bootstrap/jquery  -->
