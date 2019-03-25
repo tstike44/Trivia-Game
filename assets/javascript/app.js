@@ -128,7 +128,7 @@ $(document).ready(function () {
 
 		results: function () {
 			$("#results-text").append("<h3 id=correct>You got: " + this.correct + " correct! :D</h3> <br>");
-			$("#results-text").append("<h3 id=correct>You got: " + this.incorrect + " incorrect! :(</h3> <br>");
+			$("#results-text").append("<h3 id=incorrect>You got: " + this.incorrect + " incorrect! :(</h3> <br>");
 
 		} //end of results function
 
